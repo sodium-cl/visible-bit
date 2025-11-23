@@ -10,7 +10,7 @@ public class BitTorrentFilesController : ControllerBase
     [HttpPost("upload")]
     [Consumes("application/x-bittorrent", "multipart/form-data")]
     public async Task<IActionResult> UploadMultiple([FromForm] IFormFileCollection torrentFiles)
-   {
+    {
         var torrentfileNameList = new List<string>();
         foreach (var torrentFile in torrentFiles)
         {
