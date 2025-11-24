@@ -20,7 +20,15 @@ public class BitTorrentFilesController : ControllerBase
             }
             else
             {
-                torrentfileNameList.Add(torrentFile.FileName);    
+                torrentfileNameList.Add(torrentFile.FileName);
+                var requestStream = torrentFile.OpenReadStream();
+                var memoryStream = new MemoryStream();
+                await requestStream.CopyToAsync(memoryStream);
+                var fileBytes = memoryStream.ToArray();
+                foreach(var fileByte in fileBytes)
+                {
+                    Console.WriteLine(fileByte);
+                }
             }
         }
         return Ok(new { message = "Files uploaded successfully.", fileNames = torrentfileNameList });
